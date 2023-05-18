@@ -10,17 +10,23 @@ import { app } from '../firebase.config'
 import logo from '../Assets/logo.png'
 import avatar from '../Assets/avatar.png'
 import { Link } from 'react-router-dom'
+import { useStateValue } from '../Context/StateProvider';
+import { actionType } from '../Context/Reducer';
 
 
 
 const Header = () => {
 
     const firebaseAuth = getAuth(app);
-    const provider = new GoogleAuthProvider();
+    const provider =new GoogleAuthProvider();
 
+    const [{user},dispatch] = useStateValue()
     const login = async () => {
-        const response = await signInWithPopup(firebaseAuth,provider)
-        console.log(response)
+        const {user:{refreshToken,providerData}} = await signInWithPopup(firebaseAuth,provider)
+        dispatch({
+            type : actionType.SET_USER,
+            user : providerData,
+        })
     }
 
     return (
@@ -50,7 +56,7 @@ const Header = () => {
                         <motion.img
                             whileTap={{ scale: 0.6 }}
                             onClick={login}
-                            src={avatar} alt="userprofile" className='w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer'
+                            src={user ? user.photoURL : avatar} alt="userprofile" className='w-10 h-10 rounded-full min-w-[40px] min-h-[40px] drop-shadow-xl cursor-pointer'
                         />
                     </div>
                 </div>

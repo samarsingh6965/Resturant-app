@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import { MdFastfood, MdCloudUpload, MdDelete, MdFoodBank,MdAttachMoney } from 'react-icons/md'
 import { categories } from './Data'
 import Loader from './Loader'
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import { storage } from '../firebase.config'
 
 const CreateContainer = () => {
 
@@ -16,8 +18,37 @@ const CreateContainer = () => {
   const [msg, setMsg] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  const uploadImage = () => {
-
+  const uploadImage = (e) => {
+    setIsLoading(true);
+    const iamgeFile = e.target.files[0];
+    const storageRef = ref(storage , `Image/${Date.now()}-${iamgeFile.name}`);
+    const uploadTask = uploadBytesResumable(storageRef,iamgeFile);
+    uploadTask.on('state_changed'
+    ,(snapshot) => {
+      const uploadProgress = (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
+    } 
+    ,(error) => {
+      console.log(error);
+      setFields(true);
+      setMsg("Error while uploading : Try Again ");
+      setAlertStatus('danger');
+      setTimeout(() => {
+        setFields(false)
+        setIsLoading(false)
+      },4000)
+    } 
+    ,() => {
+      getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+        setImageAsset(downloadURL);
+        setIsLoading(false);
+        setFields(true);
+        setMsg("Image uploaded successfully");
+        setAlertStatus("success");
+        setTimeout(() => {
+          setFields(false)
+        }, 4000);
+      })
+    })
   };
 
   const deleteImage = () => {

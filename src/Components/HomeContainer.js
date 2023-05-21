@@ -1,7 +1,7 @@
 import React from 'react'
 import Delivery from '../Assets/delivery.png'
 import HeroBg from '../Assets/heroBg.png'
-import {heroData} from './Data'
+import {heroData} from '../utils/Data'
 
 
 

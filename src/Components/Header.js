@@ -76,7 +76,7 @@ const Header = () => {
                     </div>
                     <div className="relative">
                         <motion.img
-                            whileTap={{ scale: 0.5 }}
+                            whileTap={{ scale : 0.6 }}
                             onClick={login}
                             src={user ? user.photoURL : avatar}
                             alt="userprofile"

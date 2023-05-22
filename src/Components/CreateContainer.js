@@ -123,7 +123,6 @@ const CreateContainer = () => {
     setImageAsset(null)
     setCalories("")
     setPrice("")
-    setCategory("")
   };
 
   const fetchData = async () => {
@@ -159,7 +158,7 @@ const CreateContainer = () => {
 
         <div className="w-full">
           <select onChange={(e) => setCategory(e.target.value)} className='outline-none w-full border-b-2 text-base border-gray-200 p-2 rounded-md cursor-pointer'>
-            <option value="" className='bg-white'>Select Category</option>
+            <option value="others" className='bg-white'>Select Category</option>
             {categories && categories.map(item => (
               <option key={item.id} value={item.urlParamName} className='text-base border-0 outline-none capitalize bg-white text-headingColor'>
                 {item.name}

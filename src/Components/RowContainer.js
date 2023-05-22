@@ -6,10 +6,10 @@ import { motion } from 'framer-motion';
 const RowContainer = ({ flag, data }) => {
 
   return (
-    <div className={`w-full py-12 flex items-center ${flag ? 'overflow-x-scroll scrollbar-none' : 'overflow-x-hidden flex flex-wrap'}`}>
+    <div className={`w-full py-12 flex items-center gap-3 ${flag ? 'overflow-x-scroll scrollbar-none' : 'overflow-x-hidden flex flex-wrap'}`}>
       {data && data.map(item => (
-        <div key={item.id} className="w-300 min-w-[300px] md:min-w-[340px] md:w-340 my-4 rounded-lg p-2 h-auto backdrop-blur-lg bg-cardOverlay hover:drop-shadow-lg">
-          <div className="w-full flex items-center justify-between">
+        <div key={item.id} className="w-300 min-w-[300px] md:min-w-[340px] md:w-340 my-12 rounded-lg p-2 backdrop-blur-lg bg-cardOverlay hover:drop-shadow-lg">
+          <div className="w-full h-32 flex items-center justify-between">
             <motion.img
               whileHover={{ scale: 1.2 }}
               src={item.imageURL} alt=""

@@ -2,6 +2,7 @@ import React from 'react'
 import Delivery from '../Assets/delivery.png'
 import HeroBg from '../Assets/heroBg.png'
 import {heroData} from '../utils/Data'
+import { motion } from 'framer-motion'
 
 
 
@@ -33,7 +34,9 @@ const HomeContainer = () => {
           {
             heroData && heroData.map(n => (
               <div key={n.id} className="lg:w-190 drop-shadow-lg p-4 flex flex-col items-center justify-center bg-cardOverlay backdrop-blur-md rounded-3xl">
-                <img src={n.imgSrc} className='w-20 lg:w-40 -mt-10 lg:-mt-20' alt="I1" />
+                <motion.img 
+                whileHover={{scale:1.2}}
+                src={n.imgSrc} className='w-20 lg:w-40 -mt-10 lg:-mt-20' alt="I1" />
                 <p className="text-base lg:text-xl font-semibold text-textColor mt-2 lg:mt-4">{n.name}</p>
 
                 <p className="text-[12px] lg:text-sm text-lighttextGray font-semibold my-1 lg:my-3">{n.decp}</p>
